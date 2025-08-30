@@ -1,0 +1,16 @@
+# Normalize text files and prevent CRLF/LF noise
+* text=auto
+
+# Treat common binary formats as binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.zip binary
+*.gz binary
+
+# Ensure that generated files are not normalized
+.next/** -text
+node_modules/** -text
