@@ -7,8 +7,19 @@ import { Plasma } from './Plasma';
 
 export default function Hero() {
   const [plasmaColor, setPlasmaColor] = useState('#6366f1');
+  const [isLowPerformance, setIsLowPerformance] = useState(false);
 
   useEffect(() => {
+    // Detect low performance devices
+    const isLowPerformanceDevice = () => {
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      const isSlowGPU = !window.WebGLRenderingContext;
+      const isLowMemory = (navigator as any).deviceMemory && (navigator as any).deviceMemory < 4;
+      return isMobile || isSlowGPU || isLowMemory;
+    };
+
+    setIsLowPerformance(isLowPerformanceDevice());
+
     const colors = ['#6366f1', '#8b5cf6', '#06b6d4', '#10b981', '#f59e0b'];
     let colorIndex = 0;
     
@@ -22,17 +33,23 @@ export default function Hero() {
 
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-32 pb-32 bg-black">
-      {/* Plasma Background */}
-      <div className="absolute inset-0 z-0">
-        <Plasma 
-          color={plasmaColor} 
-          speed={0.5} 
-          direction="forward" 
-          scale={1.0} 
-          opacity={0.6} 
-          mouseInteractive={true}
-        />
-      </div>
+      {/* Plasma Background - Only on high performance devices */}
+      {!isLowPerformance && (
+        <div className="absolute inset-0 z-0">
+          <Plasma 
+            color={plasmaColor} 
+            speed={0.3} 
+            direction="forward" 
+            scale={0.8} 
+            opacity={0.4} 
+            mouseInteractive={false}
+          />
+        </div>
+      )}
+      {/* Fallback gradient for low performance devices */}
+      {isLowPerformance && (
+        <div className="absolute inset-0 z-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-pink-900/20"></div>
+      )}
       {/* Background overlay for better text readability */}
       <div className="absolute inset-0 bg-black/40 backdrop-blur-[0.5px] z-10"></div>
       <div className="container mx-auto px-6 text-center relative z-20">

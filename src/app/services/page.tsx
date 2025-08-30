@@ -1,8 +1,18 @@
 "use client"
 
+import { useState, useEffect } from 'react'
 import ScrollStack, { ScrollStackItem } from '../../components/ScrollStack'
 
 export default function ServicesPage() {
+  const [isLowPerformance, setIsLowPerformance] = useState(false);
+
+  useEffect(() => {
+    // Detect low performance devices for simplified animations
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const isSlowDevice = (navigator as any).deviceMemory && (navigator as any).deviceMemory < 4;
+    setIsLowPerformance(isMobile || isSlowDevice);
+  }, []);
+
   const services = [
     {
       title: "Frontend Development",
@@ -46,12 +56,12 @@ export default function ServicesPage() {
       </div>
       <div className="w-full">
         <ScrollStack
-          itemDistance={120}
-          itemScale={0.05}
-          itemStackDistance={40}
+          itemDistance={isLowPerformance ? 80 : 120}
+          itemScale={isLowPerformance ? 0.02 : 0.05}
+          itemStackDistance={isLowPerformance ? 25 : 40}
           stackPosition="10%"
           baseScale={0.92}
-          rotationAmount={2}
+          rotationAmount={isLowPerformance ? 1 : 2}
           className="h-[calc(100vh-200px)] w-full hide-scrollbar"
         >
           {services.map((service, index) => (

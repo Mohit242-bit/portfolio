@@ -1,13 +1,15 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense, lazy } from 'react'
 import LoadingScreen from '@/components/LoadingScreen'
 import Hero from '@/components/Hero'
-import About from '@/components/About'
-import ProjectsGSAP from '@/components/ProjectsGSAP'
-import DrawSVGSection from '@/components/DrawSVGSection'
-import MagicBento from '@/components/MagicBento'
 import { useRouter } from 'next/navigation'
+
+// Lazy load heavy components
+const About = lazy(() => import('@/components/About'))
+const ProjectsGSAP = lazy(() => import('@/components/ProjectsGSAP'))
+const DrawSVGSection = lazy(() => import('@/components/DrawSVGSection'))
+const MagicBento = lazy(() => import('@/components/MagicBento'))
 
 export default function Home() {
   const [showLoading, setShowLoading] = useState(true)
@@ -38,13 +40,15 @@ export default function Home() {
       {showLoading && <LoadingScreen onLoadingComplete={handleLoadingComplete} />}
       <main className={`min-h-screen bg-black ${showLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-500`}>
         <Hero />
-        <DrawSVGSection className="min-h-screen">
-          <About />
-        </DrawSVGSection>
-        <ProjectsGSAP />
-        <MagicBento 
-          onIssuesClick={handleIssuesClick}
-        />
+        <Suspense fallback={<div className="min-h-screen bg-black flex items-center justify-center"><div className="text-white">Loading...</div></div>}>
+          <DrawSVGSection className="min-h-screen">
+            <About />
+          </DrawSVGSection>
+          <ProjectsGSAP />
+          <MagicBento 
+            onIssuesClick={handleIssuesClick}
+          />
+        </Suspense>
       </main>
     </>
   )

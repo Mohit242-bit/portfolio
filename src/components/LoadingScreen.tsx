@@ -26,8 +26,11 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
   const progressTextRef = useRef<HTMLSpanElement>(null)
 
   useEffect(() => {
-    // Generate particles only on the client to avoid hydration mismatch
-    const generatedParticles: Particle[] = Array.from({ length: 50 }, () => ({
+    // Generate fewer particles on mobile for better performance
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const particleCount = isMobile ? 15 : 30; // Reduced from 50
+    
+    const generatedParticles: Particle[] = Array.from({ length: particleCount }, () => ({
       left: `${Math.random() * 100}%`,
       top: `${Math.random() * 100}%`,
       animationDelay: `${Math.random() * 3}s`,
