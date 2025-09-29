@@ -125,10 +125,22 @@ export const Plasma: React.FC<PlasmaProps> = ({
     const testCanvas = document.createElement('canvas');
     const testGl = testCanvas.getContext('webgl2');
     if (!testGl) {
+      console.log('WebGL2 not supported, using animated gradient fallback');
       // Fallback: create a simple gradient background
       const fallbackDiv = document.createElement('div');
       fallbackDiv.className = 'w-full h-full bg-gradient-to-br from-blue-500/60 via-purple-500/40 to-pink-500/60 animate-pulse';
-      fallbackDiv.style.animationDuration = '4s';
+      fallbackDiv.style.cssText = `
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, 
+          rgba(99, 102, 241, 0.6) 0%, 
+          rgba(168, 85, 247, 0.4) 25%,
+          rgba(236, 72, 153, 0.6) 50%,
+          rgba(59, 130, 246, 0.4) 75%,
+          rgba(99, 102, 241, 0.6) 100%);
+        background-size: 400% 400%;
+        animation: gradientShift 8s ease infinite;
+      `;
       containerRef.current.appendChild(fallbackDiv);
       return;
     }

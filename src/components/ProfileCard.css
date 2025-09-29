@@ -235,23 +235,40 @@
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 640px) {
+  .pc-card-wrapper {
+    width: 300px;
+    height: 360px;
+    margin: 0 auto;
+  }
+  
+  .pc-avatar-content {
+    padding: 25px 20px 15px;
+  }
+  
+  .avatar {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
   .pc-card-wrapper {
     width: 280px;
     height: 340px;
   }
   
   .pc-avatar-content {
-    padding: 30px 20px 15px;
+    padding: 20px 15px 10px;
   }
   
   .avatar {
-    width: 140px;
-    height: 140px;
+    width: 130px;
+    height: 130px;
   }
   
   .pc-details {
-    padding: 0 20px 20px;
+    padding: 0 15px 15px;
   }
   
   .pc-details h3 {
@@ -263,10 +280,10 @@
   }
   
   .pc-user-info {
-    bottom: 15px;
-    left: 15px;
-    right: 15px;
-    padding: 10px 14px;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    padding: 8px 12px;
   }
   
   .pc-contact-btn {
@@ -275,7 +292,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 375px) {
   .pc-card-wrapper {
     width: 260px;
     height: 320px;
@@ -288,5 +305,9 @@
   
   .pc-details h3 {
     font-size: 18px;
+  }
+  
+  .pc-details p {
+    font-size: 13px;
   }
 }

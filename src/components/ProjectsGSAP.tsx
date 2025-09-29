@@ -296,7 +296,7 @@ const ProjectsGSAP = () => {
   return (
     <>
       {/* Title Section with Animated Background */}
-      <section className="py-20 bg-black relative overflow-hidden">
+      <section className="py-12 sm:py-16 md:py-20 bg-black relative overflow-hidden">
         {/* Animated Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
@@ -306,15 +306,15 @@ const ProjectsGSAP = () => {
           <div className="absolute bottom-1/3 right-2/3 w-1 h-1 bg-yellow-500 rounded-full animate-pulse" style={{ animationDelay: '1.5s' }}></div>
         </div>
         
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <div 
             ref={titleContainerRef}
-            className="min-h-[60vh] flex items-center justify-center relative"
+            className="min-h-[40vh] sm:min-h-[50vh] md:min-h-[60vh] flex items-center justify-center relative"
           >
             <h1 
-              className="projects-title text-white font-bold text-center"
+              className="projects-title text-white font-bold text-center px-4"
               style={{ 
-                fontSize: 'clamp(2rem, 8vw, 6rem)',
+                fontSize: 'clamp(1.5rem, 6vw, 6rem)',
                 lineHeight: '1.2',
                 textShadow: '0 0 30px rgba(59, 130, 246, 0.3)'
               }}
@@ -326,7 +326,7 @@ const ProjectsGSAP = () => {
       </section>
 
       {/* Featured Projects Grid with Enhanced Background */}
-      <section className="py-20 bg-black relative overflow-hidden">
+      <section className="py-12 sm:py-16 md:py-20 bg-black relative overflow-hidden">
         {/* Grid Background Pattern */}
         <div 
           className="absolute inset-0 opacity-5"
@@ -339,10 +339,10 @@ const ProjectsGSAP = () => {
           }}
         ></div>
         
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <div 
             ref={gridContainerRef}
-            className="grid grid-cols-1 md:grid-cols-2 gap-8 w-[80vw] max-w-[80vw] mx-auto"
+            className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-6xl mx-auto"
           >
             {featuredProjects.map((project) => (
               <div 
@@ -350,7 +350,7 @@ const ProjectsGSAP = () => {
                 className="project-card bg-gray-900 rounded-2xl overflow-hidden shadow-2xl border border-gray-800 group transition-all duration-300"
               >
                 {/* Project Image/Thumbnail */}
-                <div className="relative h-48 overflow-hidden group">
+                <div className="relative h-40 sm:h-44 md:h-48 overflow-hidden group">
                   <ProjectImage
                     src={project.image}
                     alt={project.title}
@@ -360,40 +360,40 @@ const ProjectsGSAP = () => {
                   />
                   {/* Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                  <div className="absolute top-4 right-4 bg-blue-600/90 backdrop-blur-sm rounded-full px-3 py-1">
+                  <div className="absolute top-3 sm:top-4 right-3 sm:right-4 bg-blue-600/90 backdrop-blur-sm rounded-full px-2 py-0.5 sm:px-3 sm:py-1">
                     <span className="text-xs font-medium text-white">Featured</span>
                   </div>
-                  <div className="absolute bottom-4 left-4 text-3xl drop-shadow-lg">{project.icon}</div>
+                  <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-2xl sm:text-3xl drop-shadow-lg">{project.icon}</div>
                 </div>
                 
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">
+                <div className="p-4 sm:p-5 md:p-6">
+                  <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 group-hover:text-blue-400 transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-gray-300 mb-4 text-sm leading-relaxed line-clamp-2">
+                  <p className="text-gray-300 mb-3 sm:mb-4 text-xs sm:text-sm leading-relaxed line-clamp-2">
                     {project.description}
                   </p>
                   
-                  <div className="flex flex-wrap gap-2 mb-6">
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-6">
                     {project.tech.map((tech, techIndex) => (
                       <span 
                         key={techIndex} 
-                        className="px-3 py-1 bg-gray-800/80 text-gray-300 text-xs rounded-full font-medium border border-gray-700 backdrop-blur-sm"
+                        className="px-2 sm:px-3 py-0.5 sm:py-1 bg-gray-800/80 text-gray-300 text-xs rounded-full font-medium border border-gray-700 backdrop-blur-sm"
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
                   
-                  <div className="flex gap-3">
+                  <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                     <a
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex-1"
                     >
-                      <StarBorder className="w-full text-center" color="#3B82F6">
-                        <span className="text-sm font-medium">Live Demo</span>
+                      <StarBorder className="w-full text-center py-2 sm:py-3" color="#3B82F6">
+                        <span className="text-xs sm:text-sm font-medium">Live Demo</span>
                       </StarBorder>
                     </a>
                     <a
@@ -402,8 +402,8 @@ const ProjectsGSAP = () => {
                       rel="noopener noreferrer"
                       className="flex-1"
                     >
-                      <StarBorder className="w-full text-center" color="#6B7280">
-                        <span className="text-sm font-medium">View Code</span>
+                      <StarBorder className="w-full text-center py-2 sm:py-3" color="#6B7280">
+                        <span className="text-xs sm:text-sm font-medium">View Code</span>
                       </StarBorder>
                     </a>
                   </div>

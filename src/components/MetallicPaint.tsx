@@ -375,6 +375,7 @@ export default function MetallicPaint({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [gl, setGl] = useState<WebGL2RenderingContext | null>(null);
   const [uniforms, setUniforms] = useState<{ [key: string]: WebGLUniformLocation | null }>({});
+  const [hasError, setHasError] = useState(false);
   const totalAnimationTime = useRef(0);
   const lastRenderTime = useRef(0);
 
@@ -390,14 +391,17 @@ export default function MetallicPaint({
 
   useEffect(() => {
     function initShader() {
-      const canvas = canvasRef.current;
-      const gl = canvas?.getContext("webgl2", {
-        antialias: true,
-        alpha: true,
-      });
-      if (!canvas || !gl) {
-        return;
-      }
+      try {
+        const canvas = canvasRef.current;
+        const gl = canvas?.getContext("webgl2", {
+          antialias: true,
+          alpha: true,
+        });
+        if (!canvas || !gl) {
+          console.warn('WebGL2 context not available, using fallback');
+          setHasError(true);
+          return;
+        }
 
       function createShader(
         gl: WebGL2RenderingContext,
@@ -481,6 +485,10 @@ export default function MetallicPaint({
       gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
 
       setGl(gl);
+    } catch (error) {
+      console.warn('Error initializing WebGL shader:', error);
+      setHasError(true);
+    }
     }
 
     initShader();
@@ -585,6 +593,15 @@ export default function MetallicPaint({
       }
     };
   }, [gl, uniforms, imageData]);
+
+  // Return fallback if WebGL failed to initialize
+  if (hasError) {
+    return (
+      <div className="paint-container bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-600 flex items-center justify-center">
+        <div className="w-4 h-4 bg-white/80 rounded-full animate-pulse" />
+      </div>
+    );
+  }
 
   return (
     <canvas ref={canvasRef} className="paint-container" />
