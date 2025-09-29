@@ -10,12 +10,18 @@ export default function Hero() {
   const [isLowPerformance, setIsLowPerformance] = useState(false);
 
   useEffect(() => {
-    // Detect low performance devices
+    // Detect low performance devices with better logic
     const isLowPerformanceDevice = () => {
       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-      const isSlowGPU = !window.WebGLRenderingContext;
+      const isSlowGPU = !window.WebGLRenderingContext && !window.WebGL2RenderingContext;
       const isLowMemory = (navigator as any).deviceMemory && (navigator as any).deviceMemory < 4;
-      return isMobile || isSlowGPU || isLowMemory;
+      const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      
+      // Force gradient background for debugging - remove this line later
+      console.log('Device detection:', { isMobile, isSlowGPU, isLowMemory, isTouch });
+      
+      // For now, let's use gradients on mobile for better performance
+      return isMobile || isTouch;
     };
 
     setIsLowPerformance(isLowPerformanceDevice());
@@ -46,9 +52,23 @@ export default function Hero() {
           />
         </div>
       )}
-      {/* Fallback gradient for low performance devices */}
+      {/* Enhanced fallback gradient for low performance devices */}
       {isLowPerformance && (
-        <div className="absolute inset-0 z-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-pink-900/20"></div>
+        <div className="absolute inset-0 z-0">
+          <div 
+            className="w-full h-full animate-pulse"
+            style={{
+              background: `linear-gradient(135deg, 
+                ${plasmaColor}40 0%, 
+                rgba(139, 92, 246, 0.3) 25%,
+                rgba(236, 72, 153, 0.4) 50%,
+                rgba(59, 130, 246, 0.3) 75%,
+                ${plasmaColor}40 100%)`,
+              backgroundSize: '400% 400%',
+              animation: 'gradientShift 8s ease infinite'
+            }}
+          />
+        </div>
       )}
       {/* Background overlay for better text readability */}
       <div className="absolute inset-0 bg-black/40 backdrop-blur-[0.5px] z-10"></div>

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Renderer, Program, Mesh, Triangle } from "ogl";
 
 interface PlasmaProps {
@@ -112,6 +112,7 @@ export const Plasma: React.FC<PlasmaProps> = ({
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const mousePos = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const mouseHandlerRef = useRef<((e: MouseEvent) => void) | null>(null);
+  const [hasInitialized, setHasInitialized] = useState(false);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -123,25 +124,34 @@ export const Plasma: React.FC<PlasmaProps> = ({
 
     // Check for WebGL 2 support
     const testCanvas = document.createElement('canvas');
-    const testGl = testCanvas.getContext('webgl2');
+    const testGl = testCanvas.getContext('webgl2') || testCanvas.getContext('webgl');
+    
     if (!testGl) {
-      console.log('WebGL2 not supported, using animated gradient fallback');
-      // Fallback: create a simple gradient background
+      console.log('WebGL not supported, using animated gradient fallback');
+      // Enhanced fallback with better visibility
       const fallbackDiv = document.createElement('div');
-      fallbackDiv.className = 'w-full h-full bg-gradient-to-br from-blue-500/60 via-purple-500/40 to-pink-500/60 animate-pulse';
+      const customColorRgb = color ? hexToRgb(color) : [99, 102, 241];
+      
       fallbackDiv.style.cssText = `
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
         height: 100%;
         background: linear-gradient(135deg, 
-          rgba(99, 102, 241, 0.6) 0%, 
-          rgba(168, 85, 247, 0.4) 25%,
-          rgba(236, 72, 153, 0.6) 50%,
-          rgba(59, 130, 246, 0.4) 75%,
-          rgba(99, 102, 241, 0.6) 100%);
+          rgba(${customColorRgb[0] * 255}, ${customColorRgb[1] * 255}, ${customColorRgb[2] * 255}, ${opacity * 0.8}) 0%, 
+          rgba(168, 85, 247, ${opacity * 0.6}) 25%,
+          rgba(236, 72, 153, ${opacity * 0.8}) 50%,
+          rgba(59, 130, 246, ${opacity * 0.6}) 75%,
+          rgba(${customColorRgb[0] * 255}, ${customColorRgb[1] * 255}, ${customColorRgb[2] * 255}, ${opacity * 0.8}) 100%);
         background-size: 400% 400%;
-        animation: gradientShift 8s ease infinite;
+        animation: gradientShift ${8 / speed}s ease infinite;
+        z-index: 1;
+        pointer-events: none;
       `;
+      
       containerRef.current.appendChild(fallbackDiv);
+      setHasInitialized(true);
       return;
     }
 
@@ -233,14 +243,34 @@ export const Plasma: React.FC<PlasmaProps> = ({
         rafRef.current = requestAnimationFrame(loop);
       };
       rafRef.current = requestAnimationFrame(loop);
+      setHasInitialized(true);
 
     } catch (error) {
       console.warn('WebGL initialization failed, using fallback:', error);
-      // Fallback
+      // Enhanced fallback with better visibility
       const fallbackDiv = document.createElement('div');
-      fallbackDiv.className = 'w-full h-full bg-gradient-to-br from-blue-500/60 via-purple-500/40 to-pink-500/60 animate-pulse';
-      fallbackDiv.style.animationDuration = '4s';
+      const customColorRgb = color ? hexToRgb(color) : [99, 102, 241];
+      
+      fallbackDiv.style.cssText = `
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, 
+          rgba(${customColorRgb[0] * 255}, ${customColorRgb[1] * 255}, ${customColorRgb[2] * 255}, ${opacity * 0.8}) 0%, 
+          rgba(168, 85, 247, ${opacity * 0.6}) 25%,
+          rgba(236, 72, 153, ${opacity * 0.8}) 50%,
+          rgba(59, 130, 246, ${opacity * 0.6}) 75%,
+          rgba(${customColorRgb[0] * 255}, ${customColorRgb[1] * 255}, ${customColorRgb[2] * 255}, ${opacity * 0.8}) 100%);
+        background-size: 400% 400%;
+        animation: gradientShift ${8 / speed}s ease infinite;
+        z-index: 1;
+        pointer-events: none;
+      `;
+      
       containerRef.current.appendChild(fallbackDiv);
+      setHasInitialized(true);
     }
   }, []) // Keep empty dependency array to prevent recreation
 

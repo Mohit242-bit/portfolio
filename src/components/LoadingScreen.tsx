@@ -125,7 +125,8 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
   return (
     <div 
       ref={containerRef}
-      className="fixed inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 z-50 flex items-center justify-center overflow-hidden"
+      className="fixed inset-0 w-screen h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 z-50 flex items-center justify-center overflow-hidden"
+      style={{ width: '100vw', height: '100vh', margin: 0, padding: 0 }}
     >
       {/* Background particles - only render after client mount */}
       {isMounted && (
@@ -146,14 +147,15 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
       )}
 
       {/* Main content */}
-      <div className="text-center relative z-10">
+      <div className="text-center relative z-10 px-4 w-full max-w-lg mx-auto">
         {/* SVG Curvy Line */}
-        <div className="mb-12">
+        <div className="mb-8 sm:mb-12">
           <svg 
-            width="400" 
-            height="100" 
+            width="100%" 
+            height="80" 
             viewBox="0 0 400 100" 
-            className="mx-auto"
+            className="mx-auto max-w-sm sm:max-w-md md:max-w-lg"
+            style={{ maxWidth: '350px' }}
           >
             <path
               ref={pathRef}
@@ -176,7 +178,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
         {/* Main Title with individual character spans */}
         <div 
           ref={textRef}
-          className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 leading-tight"
         >
           <span className="inline-block">H</span>
           <span className="inline-block">e</span>
@@ -205,22 +207,23 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
         {/* Subtitle */}
         <div 
           ref={subTextRef}
-          className="text-lg md:text-xl text-purple-200 mb-8 max-w-2xl mx-auto leading-relaxed"
+          className="text-sm sm:text-base md:text-lg text-purple-200 mb-6 sm:mb-8 max-w-xs sm:max-w-md md:max-w-lg mx-auto leading-relaxed px-2"
         >
           Welcome to my digital universe where creativity meets precision, 
-          <br />
+          <br className="hidden sm:block" />
+          <span className="sm:hidden"> </span>
           innovation dances with technology, and every pixel tells a story.
         </div>
 
         {/* Progress indicator */}
-        <div className="flex flex-col items-center space-y-4">
-          <div className="w-64 h-1 bg-white/20 rounded-full overflow-hidden backdrop-blur-sm">
+        <div className="flex flex-col items-center space-y-3 sm:space-y-4">
+          <div className="w-48 sm:w-56 md:w-64 h-1 bg-white/20 rounded-full overflow-hidden backdrop-blur-sm">
             <div 
               className="h-full bg-gradient-to-r from-purple-500 via-cyan-500 to-emerald-500 rounded-full transition-all duration-200 ease-out"
               style={{ width: `${progress}%` }}
             ></div>
           </div>
-          <span className="text-white/80 text-sm font-medium tracking-wide">
+          <span className="text-white/80 text-xs sm:text-sm font-medium tracking-wide">
             {progress}%
           </span>
         </div>

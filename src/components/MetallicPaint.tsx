@@ -597,8 +597,12 @@ export default function MetallicPaint({
   // Return fallback if WebGL failed to initialize
   if (hasError) {
     return (
-      <div className="paint-container bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-600 flex items-center justify-center">
-        <div className="w-4 h-4 bg-white/80 rounded-full animate-pulse" />
+      <div className="paint-container flex items-center justify-center" style={{
+        background: 'linear-gradient(135deg, #3b82f6, #6366f1, #8b5cf6)',
+        backgroundSize: '200% 200%',
+        animation: 'gradientShift 3s ease infinite'
+      }}>
+        <div className="w-4 h-4 bg-white/90 rounded-full animate-pulse" />
       </div>
     );
   }
