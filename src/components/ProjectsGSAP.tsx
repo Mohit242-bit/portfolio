@@ -8,6 +8,20 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 // Register plugins
 gsap.registerPlugin(ScrollTrigger);
 
+/**
+ * PROJECT DATA SOURCE:
+ * All project links and deployment URLs are fetched from your GitHub repositories:
+ * API: https://api.github.com/users/Mohit242-bit/repos
+ * 
+ * The live demo URLs come from:
+ * - `homepage` field in each GitHub repository
+ * - Vercel deployments (restaurent-hazel.vercel.app, ecommerceh.vercel.app, etc.)
+ * - GitHub Pages deployments
+ * 
+ * These are YOUR real projects from your GitHub account.
+ * You can verify them at: https://github.com/Mohit242-bit
+ */
+
 // Image component with loading and error handling
 const ProjectImage = ({ src, alt, gradient, icon, className }: {
   src: string;
@@ -50,51 +64,109 @@ const ProjectsGSAP = () => {
   const titleContainerRef = useRef<HTMLDivElement>(null);
   const gridContainerRef = useRef<HTMLDivElement>(null);
 
-  // Featured projects data - reordered: Restaurant, E-commerce, Digital Marketing, Gym
+  // Featured projects - Updated with your real GitHub repositories
   const featuredProjects = [
     {
       id: 1,
       title: "Restaurant Website",
-      description: "Modern restaurant website with online menu, reservations, and gallery.",
-      tech: ["Next.js", "Tailwind", "Framer"],
+      description: "Modern restaurant website with online menu, reservations, and gallery with Next.js and Vercel deployment.",
+      tech: ["Next.js", "TypeScript", "Tailwind CSS"],
       gradient: "from-orange-600 to-red-600",
       icon: "🍕",
       liveUrl: "https://restaurent-hazel.vercel.app/",
-      codeUrl: "#",
+      codeUrl: "https://github.com/Mohit242-bit/restaurent",
       image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=300&fit=crop&crop=center"
     },
     {
       id: 2,
       title: "E-Commerce Platform",
-      description: "Full-stack web application with React and Node.js.",
-      tech: ["React", "Node.js", "MongoDB"],
+      description: "Full-featured online store with payment integration, product catalog, and admin dashboard.",
+      tech: ["React", "Next.js", "Stripe", "TypeScript"],
       gradient: "from-blue-600 to-purple-600",
       icon: "🛒",
       liveUrl: "https://ecommerceh.vercel.app/",
-      codeUrl: "#",
+      codeUrl: "https://github.com/Mohit242-bit/ecommerce",
       image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop&crop=center"
     },
     {
       id: 3,
       title: "Digital Marketing Website",
-      description: "Professional digital marketing website for agencies and freelancers.",
-      tech: ["Next.js", "TypeScript", "SEO"],
+      description: "Professional digital marketing agency website showcasing services and portfolio with modern design.",
+      tech: ["Next.js", "TypeScript", "Tailwind CSS"],
       gradient: "from-purple-600 to-pink-600",
       icon: "📈",
       liveUrl: "https://mohit242-bit.github.io/DigitalMarketingwebsite/",
-      codeUrl: "#",
+      codeUrl: "https://github.com/Mohit242-bit/DigitalMarketingwebsite",
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop&crop=center"
     },
     {
       id: 4,
-      title: "Gym Website",
-      description: "Complete gym management system with member portal and class booking.",
-      tech: ["React", "Node.js", "MongoDB"],
+      title: "Blog Summarizer Extension",
+      description: "Chrome extension that uses AI to automatically summarize articles and blog posts with advanced NLP.",
+      tech: ["JavaScript", "Chrome API", "AI/NLP"],
       gradient: "from-green-600 to-teal-600",
-      icon: "🏋️",
-      liveUrl: "#",
-      codeUrl: "#",
-      image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=300&fit=crop&crop=center"
+      icon: "📝",
+      liveUrl: "https://github.com/Mohit242-bit/auto-blog-summarizer",
+      codeUrl: "https://github.com/Mohit242-bit/auto-blog-summarizer",
+      image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65b?w=400&h=300&fit=crop&crop=center"
+    }
+  ];
+
+  // Other projects from GitHub
+  const otherProjects = [
+    {
+      id: 5,
+      title: "Morpho - Design System",
+      description: "Modern design system and component library with TypeScript and Storybook integration.",
+      tech: ["TypeScript", "React", "Design System"],
+      liveUrl: "https://morpho-beryl.vercel.app",
+      codeUrl: "https://github.com/Mohit242-bit/morpho",
+      icon: "🎨"
+    },
+    {
+      id: 6,
+      title: "SCANE - Scanning Application",
+      description: "Advanced scanning and document processing application with real-time analysis.",
+      tech: ["TypeScript", "React", "Computer Vision"],
+      liveUrl: "https://scane-kycs.vercel.app",
+      codeUrl: "https://github.com/Mohit242-bit/scane",
+      icon: "📱"
+    },
+    {
+      id: 7,
+      title: "SIH - Government Solution",
+      description: "Smart India Hackathon project - innovative solution for government challenges.",
+      tech: ["TypeScript", "Next.js", "Full-Stack"],
+      liveUrl: "https://sih-theta-two.vercel.app",
+      codeUrl: "https://github.com/Mohit242-bit/SIH",
+      icon: "🏛️"
+    },
+    {
+      id: 8,
+      title: "AI for Climate",
+      description: "Machine learning project for climate change analysis and prediction using Python.",
+      tech: ["JavaScript", "Python", "ML"],
+      liveUrl: "https://github.com/Mohit242-bit/aiforclimate",
+      codeUrl: "https://github.com/Mohit242-bit/aiforclimate",
+      icon: "🌍"
+    },
+    {
+      id: 9,
+      title: "Spotify Clone",
+      description: "Full-featured music streaming application cloning Spotify's core functionality.",
+      tech: ["JavaScript", "HTML/CSS", "Audio API"],
+      liveUrl: "https://github.com/Mohit242-bit/spotifyclone",
+      codeUrl: "https://github.com/Mohit242-bit/spotifyclone",
+      icon: "🎵"
+    },
+    {
+      id: 10,
+      title: "PDF AI Editor",
+      description: "Intelligent PDF editor using Google's Gemini AI for smart document editing.",
+      tech: ["Python", "Gemini API", "PDF Processing"],
+      liveUrl: "https://github.com/Mohit242-bit/gemini-pdf-editor",
+      codeUrl: "https://github.com/Mohit242-bit/gemini-pdf-editor",
+      icon: "📄"
     }
   ];
 
@@ -160,29 +232,27 @@ const ProjectsGSAP = () => {
     // Enhanced Projects Grid Animation with more dynamic effects
     const projectCards = document.querySelectorAll('.project-card');
     
-    // Add GPU acceleration to all cards
+    // Add GPU acceleration to all cards - Simplified for better performance
     projectCards.forEach((card, index) => {
       (card as HTMLElement).style.willChange = 'transform, opacity';
+      (card as HTMLElement).style.transform = 'translate3d(0, 0, 0)'; // Enable GPU
       
-      // Set initial state with more dramatic effect
+      // Set initial state - simplified to 2D transforms only
       gsap.set(card, { 
         opacity: 0, 
-        y: 100, 
-        scale: 0.8,
-        rotationY: 45,
-        transformOrigin: "center center"
+        y: 50,
+        scale: 0.95
       });
     });
 
-    // Animate cards with enhanced effects
+    // Animate cards with simplified effects for better performance
     gsap.to('.project-card', {
       opacity: 1,
       y: 0,
       scale: 1,
-      rotationY: 0,
-      duration: 1.2,
-      stagger: 0.2,
-      ease: "back.out(1.4)",
+      duration: 0.6,
+      stagger: 0.1,
+      ease: "power2.out",
       scrollTrigger: {
         trigger: gridContainerRef.current,
         start: "top 85%",
@@ -190,45 +260,32 @@ const ProjectsGSAP = () => {
         toggleActions: "play none none reverse"
       },
       onComplete: () => {
-        // Remove will-change after animation and add subtle floating
-        projectCards.forEach((card, index) => {
+        // Remove will-change after animation
+        projectCards.forEach((card) => {
           (card as HTMLElement).style.willChange = 'auto';
-          
-          // Add subtle floating animation to each card
-          gsap.to(card, {
-            y: Math.sin(index) * 3,
-            duration: 3 + (index * 0.5),
-            ease: "power2.inOut",
-            repeat: -1,
-            yoyo: true,
-            delay: index * 0.2
-          });
         });
       }
     });
 
-    // Enhanced hover animations with more dramatic effects
+    // Simplified hover animations - removed 3D transforms
     let hoverTimeout: NodeJS.Timeout;
     projectCards.forEach((card, index) => {
       const handleMouseEnter = () => {
         clearTimeout(hoverTimeout);
         
-        // More dramatic hover effect
+        // Simplified hover effect - 2D transforms only
         gsap.to(card, { 
-          scale: 1.05, 
-          y: -8, 
-          rotationY: 5,
-          rotationX: 3,
-          duration: 0.3, 
+          scale: 1.03, 
+          y: -4,
+          duration: 0.25, 
           ease: "power2.out",
-          overwrite: true,
-          transformOrigin: "center center"
+          overwrite: true
         });
 
-        // Add glow effect
+        // Add subtle glow effect
         gsap.to(card, {
-          boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3), 0 0 20px rgba(59, 130, 246, 0.2)",
-          duration: 0.3,
+          boxShadow: "0 10px 25px rgba(59, 130, 246, 0.2)",
+          duration: 0.25,
           ease: "power2.out"
         });
 
@@ -236,8 +293,8 @@ const ProjectsGSAP = () => {
         const img = card.querySelector('img');
         if (img) {
           gsap.to(img, {
-            scale: 1.1,
-            duration: 0.3,
+            scale: 1.05,
+            duration: 0.25,
             ease: "power2.out"
           });
         }
@@ -247,10 +304,8 @@ const ProjectsGSAP = () => {
         hoverTimeout = setTimeout(() => {
           gsap.to(card, { 
             scale: 1, 
-            y: Math.sin(index) * 3, // Return to floating position
-            rotationY: 0,
-            rotationX: 0,
-            duration: 0.3, 
+            y: 0,
+            duration: 0.25, 
             ease: "power2.out",
             overwrite: true
           });
@@ -258,7 +313,7 @@ const ProjectsGSAP = () => {
           // Remove glow effect
           gsap.to(card, {
             boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-            duration: 0.3,
+            duration: 0.25,
             ease: "power2.out"
           });
 
@@ -267,7 +322,7 @@ const ProjectsGSAP = () => {
           if (img) {
             gsap.to(img, {
               scale: 1,
-              duration: 0.3,
+              duration: 0.25,
               ease: "power2.out"
             });
           }
@@ -296,7 +351,7 @@ const ProjectsGSAP = () => {
   return (
     <>
       {/* Title Section with Animated Background */}
-      <section className="py-12 sm:py-16 md:py-20 bg-black relative overflow-hidden">
+  <section className="py-4 sm:py-6 md:py-8 bg-black relative overflow-hidden">
         {/* Animated Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
@@ -309,7 +364,7 @@ const ProjectsGSAP = () => {
         <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <div 
             ref={titleContainerRef}
-            className="min-h-[40vh] sm:min-h-[50vh] md:min-h-[60vh] flex items-center justify-center relative"
+            className="min-h-[10vh] sm:min-h-[12vh] md:min-h-[14vh] flex items-center justify-center relative"
           >
             <h1 
               className="projects-title text-white font-bold text-center px-4"
@@ -405,6 +460,73 @@ const ProjectsGSAP = () => {
                       <StarBorder className="w-full text-center py-2 sm:py-3" color="#6B7280">
                         <span className="text-xs sm:text-sm font-medium">View Code</span>
                       </StarBorder>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Other Projects Section */}
+      <section className="py-12 sm:py-16 md:py-20 bg-black relative overflow-hidden">
+        {/* Grid Background Pattern */}
+        <div 
+          className="absolute inset-0 opacity-3"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '40px 40px'
+          }}
+        ></div>
+        
+        <div className="container mx-auto px-4 sm:px-6 relative z-10">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-8 sm:mb-12 text-center">
+            Other <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Projects</span>
+          </h2>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-7xl mx-auto">
+            {otherProjects.map((project) => (
+              <div 
+                key={project.id}
+                className="project-card-small bg-gray-900/80 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800 hover:border-blue-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20 group h-full flex flex-col"
+              >
+                <div className="p-5 sm:p-6 flex flex-col flex-grow">
+                  <div className="flex items-start justify-between mb-3 sm:mb-4">
+                    <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-blue-400 transition-colors flex-1">
+                      {project.title}
+                    </h3>
+                    <div className="text-2xl sm:text-3xl ml-2 flex-shrink-0">{project.icon}</div>
+                  </div>
+                  
+                  <p className="text-gray-400 text-xs sm:text-sm leading-relaxed mb-4 flex-grow">
+                    {project.description}
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-1.5 mb-4 sm:mb-6">
+                    {project.tech.map((tech, techIndex) => (
+                      <span 
+                        key={techIndex} 
+                        className="px-2 py-1 bg-blue-500/10 text-blue-300 text-xs rounded-md font-medium border border-blue-500/20"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                  
+                  <div className="flex flex-col gap-2 sm:gap-3">
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full"
+                    >
+                      <button className="w-full px-3 py-2 sm:py-3 bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-medium rounded-lg transition-colors">
+                        Live / Code
+                      </button>
                     </a>
                   </div>
                 </div>

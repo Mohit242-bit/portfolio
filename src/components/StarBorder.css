@@ -5,28 +5,46 @@
   overflow: hidden;
 }
 
+
 .border-gradient-bottom {
   position: absolute;
   width: 300%;
   height: 50%;
-  opacity: 0.7;
+  opacity: 0;
   bottom: -12px;
   right: -250%;
   border-radius: 50%;
   animation: star-movement-bottom linear infinite alternate;
+  animation-play-state: paused;
+  transition: opacity 0.5s ease-in-out;
   z-index: 0;
+  pointer-events: none;
 }
+
+.star-border-container:hover .border-gradient-bottom {
+  animation-play-state: running;
+  opacity: 1;
+}
+
 
 .border-gradient-top {
   position: absolute;
-  opacity: 0.7;
+  opacity: 0;
   width: 300%;
   height: 50%;
   top: -12px;
   left: -250%;
   border-radius: 50%;
   animation: star-movement-top linear infinite alternate;
+  animation-play-state: paused;
+  transition: opacity 0.5s ease-in-out;
   z-index: 0;
+  pointer-events: none;
+}
+
+.star-border-container:hover .border-gradient-top {
+  animation-play-state: running;
+  opacity: 1;
 }
 
 .inner-content {
@@ -36,7 +54,7 @@
   color: white;
   font-size: 16px;
   text-align: center;
-  padding: 16px 26px;
+  padding: 16px 40px;
   border-radius: 20px;
   z-index: 1;
 }

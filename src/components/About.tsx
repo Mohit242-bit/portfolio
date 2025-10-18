@@ -1,6 +1,5 @@
 'use client'
 
-import ElectricBorder from './ElectricBorder'
 import { ScrollAnimation, StaggerAnimation } from './ScrollAnimations'
 import LogoLoop from './LogoLoop'
 import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiNodedotjs, SiFigma, SiMongodb, SiPostgresql, SiGit, SiExpress } from 'react-icons/si'
@@ -8,6 +7,26 @@ import StarBorder from './StarBorder'
 import ProfileCard from './ProfileCard'
 
 export default function About() {
+  
+  const handleDownloadCV = async () => {
+    try {
+      const response = await fetch('/api/resume');
+      if (!response.ok) throw new Error('Failed to download CV');
+      
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Mohit-Rawat-Resume.pdf';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (error) {
+      console.error('Error downloading CV:', error);
+      alert('Failed to download CV. Please try again.');
+    }
+  }
   
   const skills = [
     { category: "Frontend", items: ["React & Next.js", "TypeScript", "Tailwind CSS", "GSAP Animation"] },
@@ -52,7 +71,13 @@ export default function About() {
                 <StarBorder as="a" href="#projects" className="px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-semibold text-center" color="#C0C0C0" style={{background: '#000'}}>
                   View My Work
                 </StarBorder>
-                <StarBorder as="a" href="/resume.pdf" className="px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-semibold text-center" color="#C0C0C0" style={{background: '#000'}}>
+                <StarBorder 
+                  as="button" 
+                  onClick={handleDownloadCV}
+                  className="px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-semibold text-center cursor-pointer" 
+                  color="#C0C0C0" 
+                  style={{background: '#000'}}
+                >
                   Download CV
                 </StarBorder>
               </div>
@@ -96,15 +121,11 @@ export default function About() {
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8"
             >
               {skills.map((skillGroup, index) => (
-                <ElectricBorder
+                <div
                   key={index}
-                  color="#8b5cf6" 
-                  speed={1.2} 
-                  chaos={0.5} 
-                  thickness={1}
-                  className="rounded-2xl"
+                  className="bg-gray-900/90 rounded-2xl p-4 sm:p-5 md:p-6 hover:bg-gray-800/90 transition-colors border border-gray-800 h-full"
                 >
-                  <div className="bg-gray-900/90 rounded-2xl p-4 sm:p-5 md:p-6 hover:bg-gray-800/90 transition-colors border-0">
+                  <div>
                     <h4 className="font-bold text-white mb-3 sm:mb-4 text-base sm:text-lg">{skillGroup.category}</h4>
                     <ul className="space-y-2 sm:space-y-3">
                       {skillGroup.items.map((skill, skillIndex) => (
@@ -115,7 +136,7 @@ export default function About() {
                       ))}
                     </ul>
                   </div>
-                </ElectricBorder>
+                </div>
               ))}
             </StaggerAnimation>
             {/* Logo Loop Animation */}

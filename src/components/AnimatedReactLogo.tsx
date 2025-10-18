@@ -60,12 +60,7 @@ export default function AnimatedReactLogo() {
     // Better fallback with proper React logo SVG
     return (
       <div 
-        className="w-10 h-10 rounded-lg flex items-center justify-center shadow-lg"
-        style={{
-          background: 'linear-gradient(135deg, #61dafb, #21a9c7)',
-          backgroundSize: '200% 200%',
-          animation: 'gradientShift 3s ease infinite'
-        }}
+        className="w-10 h-10 rounded-lg flex items-center justify-center"
       >
         <svg className="w-6 h-6 text-white" viewBox="0 0 841.9 595.3" fill="currentColor">
           <g fill="currentColor">
@@ -80,7 +75,7 @@ export default function AnimatedReactLogo() {
   }
 
   return (
-    <div className="w-10 h-10 rounded-lg overflow-hidden shadow-lg">
+    <div className="w-10 h-10 rounded-lg overflow-hidden">
       <MetallicPaint 
         imageData={imageData}
         params={{
