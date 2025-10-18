@@ -39,7 +39,7 @@ export default function Header() {
             </Link>
           
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-12 ml-8">
+          <div className="hidden md:flex space-x-8">
             {navLinks.map((item) => (
                 <Link 
                   key={item.href}

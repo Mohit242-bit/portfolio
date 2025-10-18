@@ -75,7 +75,7 @@ const ProjectsGSAP = () => {
       icon: "🍕",
       liveUrl: "https://restaurent-hazel.vercel.app/",
       codeUrl: "https://github.com/Mohit242-bit/restaurent",
-      image: "https://images.pexels.com/photos/1410235/pexels-photo-1410235.jpeg?w=400&h=300&fit=crop"
+      image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=300&fit=crop&crop=center"
     },
     {
       id: 2,
@@ -86,7 +86,7 @@ const ProjectsGSAP = () => {
       icon: "🛒",
       liveUrl: "https://ecommerceh.vercel.app/",
       codeUrl: "https://github.com/Mohit242-bit/ecommerce",
-      image: "https://images.pexels.com/photos/3394650/pexels-photo-3394650.jpeg?w=400&h=300&fit=crop"
+      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop&crop=center"
     },
     {
       id: 3,
@@ -97,7 +97,7 @@ const ProjectsGSAP = () => {
       icon: "📈",
       liveUrl: "https://mohit242-bit.github.io/DigitalMarketingwebsite/",
       codeUrl: "https://github.com/Mohit242-bit/DigitalMarketingwebsite",
-      image: "https://images.pexels.com/photos/3184654/pexels-photo-3184654.jpeg?w=400&h=300&fit=crop"
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop&crop=center"
     },
     {
       id: 4,
@@ -108,7 +108,7 @@ const ProjectsGSAP = () => {
       icon: "📝",
       liveUrl: "https://github.com/Mohit242-bit/auto-blog-summarizer",
       codeUrl: "https://github.com/Mohit242-bit/auto-blog-summarizer",
-      image: "https://images.pexels.com/photos/3823517/pexels-photo-3823517.jpeg?w=400&h=300&fit=crop"
+      image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65b?w=400&h=300&fit=crop&crop=center"
     }
   ];
 
