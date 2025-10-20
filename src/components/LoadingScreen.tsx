@@ -147,15 +147,15 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
       )}
 
       {/* Main content */}
-      <div className="text-center relative z-10 px-4 w-full max-w-lg mx-auto">
+      <div className="text-center relative z-10 px-2 sm:px-4 w-full max-w-lg mx-auto">
         {/* SVG Curvy Line */}
-        <div className="mb-8 sm:mb-12">
+        <div className="mb-6 sm:mb-8 md:mb-12">
           <svg 
             width="100%" 
-            height="80" 
-            viewBox="0 0 400 100" 
-            className="mx-auto max-w-sm sm:max-w-md md:max-w-lg"
-            style={{ maxWidth: '350px' }}
+            height="60" 
+            viewBox="0 0 400 100"
+            className="mx-auto max-w-xs sm:max-w-sm md:max-w-md"
+            style={{ maxWidth: '280px', height: 'auto' }}
           >
             <path
               ref={pathRef}
@@ -178,7 +178,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
         {/* Main Title with individual character spans */}
         <div 
           ref={textRef}
-          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 leading-tight"
+          className="text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-3 sm:mb-4 md:mb-6 leading-tight whitespace-nowrap overflow-x-auto"
         >
           <span className="inline-block">H</span>
           <span className="inline-block">e</span>
@@ -186,17 +186,17 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
           <span className="inline-block">l</span>
           <span className="inline-block">o</span>
           <span className="inline-block">,</span>
-          <span className="inline-block w-4"></span>
+          <span className="inline-block w-2 sm:w-3 md:w-4"></span>
           <span className="inline-block">I</span>
           <span className="inline-block">&apos;</span>
           <span className="inline-block">m</span>
-          <span className="inline-block w-4"></span>
+          <span className="inline-block w-2 sm:w-3 md:w-4"></span>
           <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">M</span>
           <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">o</span>
           <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">h</span>
           <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">i</span>
           <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">t</span>
-          <span className="inline-block w-4"></span>
+          <span className="inline-block w-2 sm:w-3 md:w-4"></span>
           <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">R</span>
           <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">a</span>
           <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">w</span>
@@ -207,7 +207,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
         {/* Subtitle */}
         <div 
           ref={subTextRef}
-          className="text-sm sm:text-base md:text-lg text-purple-200 mb-6 sm:mb-8 max-w-xs sm:max-w-md md:max-w-lg mx-auto leading-relaxed px-2"
+          className="text-xs sm:text-sm md:text-base text-purple-200 mb-4 sm:mb-6 md:mb-8 max-w-xs mx-auto leading-relaxed px-1"
         >
           Welcome to my digital universe where creativity meets precision, 
           <br className="hidden sm:block" />
@@ -216,8 +216,8 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
         </div>
 
         {/* Progress indicator */}
-        <div className="flex flex-col items-center space-y-3 sm:space-y-4">
-          <div className="w-48 sm:w-56 md:w-64 h-1 bg-white/20 rounded-full overflow-hidden backdrop-blur-sm">
+        <div className="flex flex-col items-center space-y-2 sm:space-y-3">
+          <div className="w-32 sm:w-48 md:w-56 h-1 bg-white/20 rounded-full overflow-hidden backdrop-blur-sm">
             <div 
               className="h-full bg-gradient-to-r from-purple-500 via-cyan-500 to-emerald-500 rounded-full transition-all duration-200 ease-out"
               style={{ width: `${progress}%` }}

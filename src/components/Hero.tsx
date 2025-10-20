@@ -38,10 +38,10 @@ export default function Hero() {
       {/* Clean black background only */}
       
       {/* Toggle Button - Top Right Corner */}
-      <div className="fixed top-6 right-6 z-50 flex items-center gap-3">
+      <div className="fixed top-4 sm:top-6 right-4 sm:right-6 z-50 flex items-center gap-2 sm:gap-3">
         <button
           onClick={() => setMode('fulltime')}
-          className={`px-5 py-2 text-sm font-medium transition-all duration-300 ${
+          className={`px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-all duration-300 ${
             mode === 'fulltime'
               ? 'text-white underline decoration-2 underline-offset-4'
               : 'text-gray-500 hover:text-gray-300'
@@ -49,10 +49,10 @@ export default function Hero() {
         >
           Full-Time
         </button>
-        <div className="w-px h-6 bg-gray-700"></div>
+        <div className="w-px h-5 sm:h-6 bg-gray-700"></div>
         <button
           onClick={() => setMode('freelance')}
-          className={`px-5 py-2 text-sm font-medium transition-all duration-300 ${
+          className={`px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-all duration-300 ${
             mode === 'freelance'
               ? 'text-white underline decoration-2 underline-offset-4'
               : 'text-gray-500 hover:text-gray-300'
@@ -64,35 +64,35 @@ export default function Hero() {
         }
       </div>
       
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 relative z-20 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+      <div className="max-w-screen-xl mx-auto px-3 sm:px-6 relative z-20 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 items-center">
           {/* Left Column - Text Content */}
           <div className="max-w-3xl mx-auto lg:mx-0">
-            <div className="mb-6 sm:mb-8">
-              <span className="inline-block px-3 py-1.5 sm:px-4 sm:py-2 bg-gray-800 text-blue-400 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6">
+            <div className="mb-4 sm:mb-8">
+              <span className="inline-block px-2.5 sm:px-4 py-1 sm:py-2 bg-gray-800 text-blue-400 rounded-full text-xs font-medium mb-3 sm:mb-6">
                 Welcome to my portfolio
               </span>
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-3 sm:mb-6 leading-tight">
               Creating Digital
               <ShinyText text="Experiences" speed={4} className="block" />
             </h1>
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 mb-8 sm:mb-10 md:mb-12 leading-relaxed">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 mb-6 sm:mb-10 md:mb-12 leading-relaxed">
               I&apos;m a passionate web developer specializing in modern, responsive websites that help businesses grow and make a lasting impression online.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
-              <StarBorder as="a" href="#projects" className="px-6 sm:px-8 md:px-0 py-3 sm:py-4 text-base sm:text-lg font-semibold w-full sm:w-auto text-center" color="#C0C0C0" style={{background: '#000'}}>
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-6">
+              <StarBorder as="a" href="#projects" className="px-4 sm:px-8 md:px-0 py-2.5 sm:py-4 text-sm sm:text-base font-semibold w-full sm:w-auto text-center" color="#C0C0C0" style={{background: '#000'}}>
                 <span className="flex items-center justify-center">
                   View My Work
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </span>
               </StarBorder>
-              <StarBorder as="a" href="/contact" className="px-8 sm:px-8 md:px-2 py-3 sm:py-4 text-base sm:text-lg font-semibold w-full sm:w-auto text-center" color="#C0C0C0" style={{background: '#000'}}>
+              <StarBorder as="a" href="/contact" className="px-4 sm:px-8 md:px-2 py-2.5 sm:py-4 text-sm sm:text-base font-semibold w-full sm:w-auto text-center" color="#C0C0C0" style={{background: '#000'}}>
                 <span className="flex items-center justify-center">
                   Get In Touch
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03 8-9 8s9 3.582 9 8z" />
                   </svg>
                 </span>
@@ -126,8 +126,8 @@ export default function Hero() {
 
       {/* Resume/Call to Action Section - Sticky Bottom Right */}
       {mode === 'fulltime' && (
-        <div className="fixed bottom-6 right-6 z-40 w-72 md:w-80">
-          <div className="relative overflow-hidden rounded-2xl border border-gray-700 bg-gradient-to-br from-[#1A1A1A] to-[#0F0F0F] shadow-2xl hover:shadow-3xl transition-all duration-300 hover:border-gray-600">
+        <div className="fixed bottom-3 sm:bottom-6 right-3 sm:right-6 z-40 w-64 sm:w-72 md:w-80">
+          <div className="relative overflow-hidden rounded-xl sm:rounded-2xl border border-gray-700 bg-gradient-to-br from-[#1A1A1A] to-[#0F0F0F] shadow-xl sm:shadow-2xl hover:shadow-2xl sm:hover:shadow-3xl transition-all duration-300 hover:border-gray-600">
             {/* Subtle Background Pattern */}
             <div className="absolute inset-0 opacity-20">
               <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -141,15 +141,15 @@ export default function Hero() {
             </div>
 
             {/* Content */}
-            <div className="relative z-10 p-5 flex items-center justify-between gap-4">
-              <div className="flex-1">
-                <h3 className="text-sm font-bold text-white mb-1">Check out my resume</h3>
-                <p className="text-xs text-gray-400">View my experience</p>
+            <div className="relative z-10 p-3 sm:p-5 flex items-center justify-between gap-3 sm:gap-4">
+              <div className="flex-1 min-w-0">
+                <h3 className="text-xs sm:text-sm font-bold text-white mb-0.5 sm:mb-1 truncate">Check out my resume</h3>
+                <p className="text-xs text-gray-400 line-clamp-1">View my experience</p>
               </div>
               
               <button
                 onClick={handleDownloadResume}
-                className="flex-shrink-0 px-5 py-2.5 bg-gradient-to-r from-[#FF6B2C] to-[#FF4500] rounded-lg font-bold text-white text-xs shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 whitespace-nowrap"
+                className="flex-shrink-0 px-3 sm:px-5 py-1.5 sm:py-2.5 bg-gradient-to-r from-[#FF6B2C] to-[#FF4500] rounded-lg font-bold text-white text-xs shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 whitespace-nowrap"
               >
                 DOWNLOAD
               </button>
@@ -159,8 +159,8 @@ export default function Hero() {
       )}
       
       {mode === 'freelance' && (
-        <div className="fixed bottom-6 right-6 z-40 w-72 md:w-80">
-          <div className="relative overflow-hidden rounded-2xl border border-gray-700 bg-gradient-to-br from-[#1A1A1A] to-[#0F0F0F] shadow-2xl hover:shadow-3xl transition-all duration-300 hover:border-gray-600">
+        <div className="fixed bottom-3 sm:bottom-6 right-3 sm:right-6 z-40 w-64 sm:w-72 md:w-80">
+          <div className="relative overflow-hidden rounded-xl sm:rounded-2xl border border-gray-700 bg-gradient-to-br from-[#1A1A1A] to-[#0F0F0F] shadow-xl sm:shadow-2xl hover:shadow-2xl sm:hover:shadow-3xl transition-all duration-300 hover:border-gray-600">
             {/* Subtle Background Pattern */}
             <div className="absolute inset-0 opacity-20">
               <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -174,15 +174,15 @@ export default function Hero() {
             </div>
 
             {/* Content */}
-            <div className="relative z-10 p-5 flex items-center justify-between gap-4">
-              <div className="flex-1">
-                <h3 className="text-sm font-bold text-white mb-1">Book a free call</h3>
-                <p className="text-xs text-gray-400">Let's discuss your project</p>
+            <div className="relative z-10 p-3 sm:p-5 flex items-center justify-between gap-3 sm:gap-4">
+              <div className="flex-1 min-w-0">
+                <h3 className="text-xs sm:text-sm font-bold text-white mb-0.5 sm:mb-1 truncate">Book a free call</h3>
+                <p className="text-xs text-gray-400 line-clamp-1">Let&apos;s discuss your project</p>
               </div>
               
               <button
                 onClick={() => window.open('https://cal.com', '_blank')}
-                className="flex-shrink-0 px-5 py-2.5 bg-gradient-to-r from-[#FF6B2C] to-[#FF4500] rounded-lg font-bold text-white text-xs shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 whitespace-nowrap"
+                className="flex-shrink-0 px-3 sm:px-5 py-1.5 sm:py-2.5 bg-gradient-to-r from-[#FF6B2C] to-[#FF4500] rounded-lg font-bold text-white text-xs shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 whitespace-nowrap"
               >
                 SCHEDULE
               </button>

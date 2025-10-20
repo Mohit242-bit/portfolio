@@ -118,7 +118,7 @@ export default function ProjectsPage() {
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
               My Work
             </h1>
-            <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto px-4 mt-6">
+            <p className="text-xs sm:text-sm md:text-base lg:text-lg text-gray-400 max-w-3xl mx-auto px-3 sm:px-4 mt-3 sm:mt-6">
               A collection of projects showcasing modern web development, scalability, and engineering excellence.
             </p>
           </div>
@@ -127,42 +127,42 @@ export default function ProjectsPage() {
           <StaggerAnimation 
             animation="fadeUp" 
             stagger={0.1}
-            className="space-y-6 sm:space-y-8"
+            className="space-y-4 sm:space-y-6 md:space-y-8"
           >
             {allProjects.map((project: any, index: number) => (
               <div
                 key={index}
-                className="group bg-gradient-to-br from-gray-900/40 to-gray-800/20 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-800/50 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-gray-700/50"
+                className="group bg-gradient-to-br from-gray-900/40 to-gray-800/20 backdrop-blur-sm rounded-lg sm:rounded-2xl overflow-hidden border border-gray-800/50 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-gray-700/50"
               >
-                <div className="p-6 sm:p-8 md:p-10">
+                <div className="p-4 sm:p-6 md:p-8 lg:p-10">
                   {/* Header with Title and Year */}
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4 sm:mb-6">
-                    <div className="flex-1">
-                      <h2 className="text-2xl sm:text-3xl font-bold text-white group-hover:text-gray-200 transition-colors">
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4 mb-3 sm:mb-4 md:mb-6">
+                    <div className="flex-1 min-w-0">
+                      <h2 className="text-lg sm:text-2xl md:text-3xl font-bold text-white group-hover:text-gray-200 transition-colors break-words">
                         {project.title}
                       </h2>
                       {project.featured && (
-                        <span className="inline-block mt-2 px-3 py-1 bg-gray-800/60 text-gray-300 text-xs font-medium rounded-full border border-gray-700/50">
+                        <span className="inline-block mt-1.5 sm:mt-2 px-2 sm:px-3 py-0.5 sm:py-1 bg-gray-800/60 text-gray-300 text-xs font-medium rounded-full border border-gray-700/50">
                           Featured
                         </span>
                       )}
                     </div>
-                    <div className="text-sm font-medium text-gray-500">
+                    <div className="text-xs sm:text-sm font-medium text-gray-500 flex-shrink-0">
                       {project.year}
                     </div>
                   </div>
                   
                   {/* Description */}
-                  <p className="text-sm sm:text-base text-gray-400 mb-6 leading-relaxed max-w-3xl">
+                  <p className="text-xs sm:text-sm md:text-base text-gray-400 mb-4 sm:mb-6 leading-relaxed max-w-3xl">
                     {project.description}
                   </p>
                   
                   {/* Tech Stack */}
-                  <div className="flex flex-wrap gap-2 mb-8">
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-5 sm:mb-8">
                     {project.tech.map((tech: string, techIndex: number) => (
                       <span 
                         key={techIndex} 
-                        className="px-3 py-1.5 bg-gray-800/50 text-gray-300 text-xs sm:text-sm rounded-lg font-medium border border-gray-700/50 hover:border-gray-600/50 transition-colors"
+                        className="px-2 sm:px-3 py-1 sm:py-1.5 bg-gray-800/50 text-gray-300 text-xs rounded-lg font-medium border border-gray-700/50 hover:border-gray-600/50 transition-colors"
                       >
                         {tech}
                       </span>
@@ -170,12 +170,12 @@ export default function ProjectsPage() {
                   </div>
                   
                   {/* Project Links */}
-                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                  <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4">
                     <a
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-6 py-3 bg-gray-800/60 hover:bg-gray-700/60 text-white text-sm font-medium rounded-lg border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300 text-center"
+                      className="px-4 sm:px-6 py-2 sm:py-3 bg-gray-800/60 hover:bg-gray-700/60 text-white text-xs sm:text-sm font-medium rounded-lg border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300 text-center flex-1 sm:flex-none"
                     >
                       {project.liveUrl.includes('github') ? 'View on GitHub' : 'Live Demo'}
                     </a>
@@ -184,7 +184,7 @@ export default function ProjectsPage() {
                         href={project.codeUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-6 py-3 bg-gray-800/60 hover:bg-gray-700/60 text-white text-sm font-medium rounded-lg border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300 text-center"
+                        className="px-4 sm:px-6 py-2 sm:py-3 bg-gray-800/60 hover:bg-gray-700/60 text-white text-xs sm:text-sm font-medium rounded-lg border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300 text-center flex-1 sm:flex-none"
                       >
                         Source Code
                       </a>
@@ -196,8 +196,8 @@ export default function ProjectsPage() {
           </StaggerAnimation>
 
           {/* Call to Action */}
-          <div className="mt-16 sm:mt-20 md:mt-24 text-center">
-            <p className="text-base sm:text-lg text-gray-400 mb-8">
+          <div className="mt-10 sm:mt-16 md:mt-20 lg:mt-24 text-center">
+            <p className="text-xs sm:text-sm md:text-base lg:text-lg text-gray-400 mb-5 sm:mb-8 px-4">
               Want to see more? Check out my GitHub profile for additional projects and contributions.
             </p>
             <a href="https://github.com/Mohit242-bit" target="_blank" rel="noopener noreferrer">

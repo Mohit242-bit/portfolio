@@ -295,7 +295,7 @@ const ProjectsGSAP = () => {
   return (
     <>
       {/* Title Section with Animated Background */}
-  <section className="py-4 sm:py-6 md:py-8 bg-black relative overflow-hidden">
+  <section className="py-2 sm:py-4 md:py-6 bg-black relative overflow-hidden">
         {/* Animated Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
@@ -305,15 +305,15 @@ const ProjectsGSAP = () => {
           <div className="absolute bottom-1/3 right-2/3 w-1 h-1 bg-yellow-500 rounded-full animate-pulse" style={{ animationDelay: '1.5s' }}></div>
         </div>
         
-        <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        <div className="container mx-auto px-3 sm:px-6 relative z-10">
           <div 
             ref={titleContainerRef}
-            className="min-h-[10vh] sm:min-h-[12vh] md:min-h-[14vh] flex items-center justify-center relative"
+            className="min-h-[8vh] sm:min-h-[10vh] md:min-h-[12vh] flex items-center justify-center relative"
           >
             <h1 
-              className="projects-title text-white font-bold text-center px-4"
+              className="projects-title text-white font-bold text-center px-2"
               style={{ 
-                fontSize: 'clamp(1.5rem, 6vw, 6rem)',
+                fontSize: 'clamp(1.2rem, 5vw, 5rem)',
                 lineHeight: '1.2',
                 textShadow: '0 0 30px rgba(59, 130, 246, 0.3)'
               }}
@@ -325,7 +325,7 @@ const ProjectsGSAP = () => {
       </section>
 
       {/* Featured Projects Grid with Enhanced Background */}
-      <section className="py-12 sm:py-16 md:py-20 bg-black relative overflow-hidden">
+      <section className="py-8 sm:py-12 md:py-16 bg-black relative overflow-hidden">
         {/* Grid Background Pattern */}
         <div 
           className="absolute inset-0 opacity-5"
@@ -338,18 +338,18 @@ const ProjectsGSAP = () => {
           }}
         ></div>
         
-        <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        <div className="container mx-auto px-3 sm:px-6 relative z-10">
           <div 
             ref={gridContainerRef}
-            className="flex flex-col gap-8 sm:gap-10 md:gap-12 max-w-5xl mx-auto"
+            className="flex flex-col gap-6 sm:gap-8 md:gap-10 max-w-5xl mx-auto"
           >
             {featuredProjects.map((project) => (
               <div 
                 key={project.id}
-                className="project-card bg-gray-900 rounded-3xl overflow-hidden shadow-2xl border border-gray-800 group transition-all duration-300"
+                className="project-card bg-gray-900 rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl sm:shadow-2xl border border-gray-800 group transition-all duration-300"
               >
                 {/* Project Image/Thumbnail - Full Width */}
-                <div className="relative h-64 sm:h-80 md:h-96 overflow-hidden">
+                <div className="relative h-48 sm:h-64 md:h-80 overflow-hidden">
                   <ProjectImage
                     src={project.image}
                     alt={project.title}
@@ -361,12 +361,12 @@ const ProjectsGSAP = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
                   
                   {/* Action Buttons Overlay */}
-                  <div className="absolute bottom-6 right-6 flex gap-3 z-20">
+                  <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 flex gap-2 sm:gap-3 z-20">
                     <a
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-full font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                      className="px-3 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-full font-semibold text-xs sm:text-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
                     >
                       Live Demo
                     </a>
@@ -374,33 +374,33 @@ const ProjectsGSAP = () => {
                       href={project.codeUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-6 py-3 bg-gray-800/90 hover:bg-gray-700/90 text-white rounded-full font-semibold text-sm shadow-lg backdrop-blur-sm border border-gray-700 hover:border-gray-600 transition-all duration-300 hover:scale-105"
+                      className="px-3 sm:px-6 py-2 sm:py-3 bg-gray-800/90 hover:bg-gray-700/90 text-white rounded-full font-semibold text-xs sm:text-sm shadow-lg backdrop-blur-sm border border-gray-700 hover:border-gray-600 transition-all duration-300 hover:scale-105"
                     >
                       View Code
                     </a>
                   </div>
                   
                   {/* Project Info Overlay */}
-                  <div className="absolute bottom-6 left-6 z-10">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="text-4xl drop-shadow-lg">{project.icon}</div>
-                      <h3 className="text-2xl sm:text-3xl font-bold text-white drop-shadow-lg">
+                  <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 z-10">
+                    <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                      <div className="text-2xl sm:text-3xl md:text-4xl drop-shadow-lg">{project.icon}</div>
+                      <h3 className="text-lg sm:text-2xl md:text-3xl font-bold text-white drop-shadow-lg line-clamp-2">
                         {project.title}
                       </h3>
                     </div>
                   </div>
                 </div>
                 
-                <div className="p-6 sm:p-8">
-                  <p className="text-gray-300 mb-4 text-base leading-relaxed">
+                <div className="p-4 sm:p-6 md:p-8">
+                  <p className="text-gray-300 mb-3 sm:mb-4 text-xs sm:text-sm md:text-base leading-relaxed line-clamp-2 sm:line-clamp-none">
                     {project.description}
                   </p>
                   
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
                     {project.tech.map((tech, techIndex) => (
                       <span 
                         key={techIndex} 
-                        className="px-4 py-2 bg-gray-800/80 text-gray-300 text-sm rounded-lg font-medium border border-gray-700 backdrop-blur-sm"
+                        className="px-2 sm:px-4 py-1 sm:py-2 bg-gray-800/80 text-gray-300 text-xs sm:text-sm rounded-lg font-medium border border-gray-700 backdrop-blur-sm"
                       >
                         {tech}
                       </span>

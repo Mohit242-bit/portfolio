@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { ScrollAnimation, StaggerAnimation } from './ScrollAnimations'
 import LogoLoop from './LogoLoop'
 import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiNodedotjs, SiFigma, SiMongodb, SiPostgresql, SiGit, SiExpress, SiJavascript, SiAngular, SiRedux, SiFlutter, SiFirebase, SiThreedotjs, SiBlender, SiMysql, SiDocker, SiVercel } from 'react-icons/si'
@@ -53,12 +53,12 @@ const SkillTabs = () => {
   return (
     <div className="w-full">
       {/* Tab Buttons - Simple underline style like reference */}
-      <div className="flex flex-wrap justify-center gap-6 mb-12">
+      <div className="flex flex-wrap justify-center gap-3 sm:gap-6 mb-8 sm:mb-12">
         {tabs.map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`px-2 py-2 text-base font-medium transition-all duration-300 relative ${
+            className={`px-1 sm:px-2 py-2 text-xs sm:text-sm md:text-base font-medium transition-all duration-300 relative ${
               activeTab === tab
                 ? 'text-white'
                 : 'text-gray-500 hover:text-gray-300'
@@ -73,16 +73,16 @@ const SkillTabs = () => {
       </div>
 
       {/* Tech Icons Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 max-w-5xl mx-auto">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-6 max-w-5xl mx-auto">
         {techStack[activeTab as keyof typeof techStack].map((tech, index) => (
           <div
             key={index}
-            className="flex flex-col items-center justify-center p-6 bg-gray-900/50 rounded-2xl border border-gray-800 hover:border-blue-500/50 transition-all duration-300 hover:scale-105 group"
+            className="flex flex-col items-center justify-center p-3 sm:p-4 md:p-6 bg-gray-900/50 rounded-lg sm:rounded-2xl border border-gray-800 hover:border-blue-500/50 transition-all duration-300 hover:scale-105 group"
           >
-            <div className="text-gray-400 group-hover:text-blue-400 transition-colors mb-3">
-              {tech.icon}
+            <div className="text-gray-400 group-hover:text-blue-400 transition-colors mb-2 sm:mb-3 w-8 h-8 sm:w-12 sm:h-12">
+              {typeof tech.icon === 'object' ? React.cloneElement(tech.icon, { className: 'w-full h-full' }) : tech.icon}
             </div>
-            <span className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors text-center">
+            <span className="text-xs sm:text-sm font-medium text-gray-300 group-hover:text-white transition-colors text-center">
               {tech.name}
             </span>
           </div>
@@ -146,16 +146,16 @@ export default function About() {
           </div>
           
           {/* Skills Section - Tab Based Layout */}
-          <ScrollAnimation animation="fadeUp" className="mt-12 sm:mt-16 md:mt-20">
-            <div className="text-center mb-8 sm:mb-10 md:mb-12">
-              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">Tech Stack</h3>
-              <p className="text-sm sm:text-base md:text-lg text-gray-300 max-w-xl sm:max-w-2xl mx-auto px-4">
+          <ScrollAnimation animation="fadeUp" className="mt-8 sm:mt-12 md:mt-20">
+            <div className="text-center mb-6 sm:mb-8 md:mb-12 px-4">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3 md:mb-4">Tech Stack</h3>
+              <p className="text-xs sm:text-sm md:text-base text-gray-300 max-w-xs sm:max-w-xl md:max-w-2xl mx-auto">
                 Powerful technologies I use to build scalable, high-performance solutions
               </p>
             </div>
             <SkillTabs />
             {/* Logo Loop Animation */}
-            <div className="mt-16 sm:mt-20 md:mt-24 mb-8 sm:mb-10 md:mb-12" style={{ height: '60px', position: 'relative', overflow: 'hidden' }}>
+            <div className="mt-10 sm:mt-16 md:mt-24 mb-6 sm:mb-8 md:mb-12 px-2" style={{ height: '40px', position: 'relative', overflow: 'hidden' }}>
               <LogoLoop
                 logos={[
                   { node: <SiReact className="text-gray-400" />, title: "React", href: "https://react.dev" },
@@ -171,8 +171,8 @@ export default function About() {
                 ]}
                 speed={100}
                 direction="left"
-                logoHeight={36}
-                gap={30}
+                logoHeight={24}
+                gap={20}
                 pauseOnHover
                 scaleOnHover
                 fadeOut
