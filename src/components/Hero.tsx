@@ -11,9 +11,58 @@ const ModelViewer = dynamic(() => import('./ModelViewer'), {
 });
 
 export default function Hero() {
+  const [mode, setMode] = useState<'fulltime' | 'freelance'>('fulltime');
+
+  const handleDownloadResume = async () => {
+    try {
+      const response = await fetch('/api/resume');
+      if (!response.ok) throw new Error('Failed to download resume');
+      
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Mohit-Rawat-Resume.pdf';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (error) {
+      console.error('Error downloading resume:', error);
+      alert('Failed to download resume. Please try again.');
+    }
+  };
+
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-24 md:pb-32 bg-black">
       {/* Clean black background only */}
+      
+      {/* Toggle Button - Top Right Corner */}
+      <div className="fixed top-6 right-6 z-50 flex items-center gap-3">
+        <button
+          onClick={() => setMode('fulltime')}
+          className={`px-5 py-2 text-sm font-medium transition-all duration-300 ${
+            mode === 'fulltime'
+              ? 'text-white underline decoration-2 underline-offset-4'
+              : 'text-gray-500 hover:text-gray-300'
+          }`}
+        >
+          Full-Time
+        </button>
+        <div className="w-px h-6 bg-gray-700"></div>
+        <button
+          onClick={() => setMode('freelance')}
+          className={`px-5 py-2 text-sm font-medium transition-all duration-300 ${
+            mode === 'freelance'
+              ? 'text-white underline decoration-2 underline-offset-4'
+              : 'text-gray-500 hover:text-gray-300'
+          }`}
+        >
+          Freelance
+        </button>
+        {mode === 'freelance'
+        }
+      </div>
       
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 relative z-20 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
@@ -40,7 +89,7 @@ export default function Hero() {
                   </svg>
                 </span>
               </StarBorder>
-              <StarBorder as="a" href="#contact" className="px-8 sm:px-8 md:px-2 py-3 sm:py-4 text-base sm:text-lg font-semibold w-full sm:w-auto text-center" color="#C0C0C0" style={{background: '#000'}}>
+              <StarBorder as="a" href="/contact" className="px-8 sm:px-8 md:px-2 py-3 sm:py-4 text-base sm:text-lg font-semibold w-full sm:w-auto text-center" color="#C0C0C0" style={{background: '#000'}}>
                 <span className="flex items-center justify-center">
                   Get In Touch
                   <svg className="w-4 h-4 sm:w-5 sm:h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -75,8 +124,75 @@ export default function Hero() {
         </div>
       </div>
 
+      {/* Resume/Call to Action Section - Sticky Bottom Right */}
+      {mode === 'fulltime' && (
+        <div className="fixed bottom-6 right-6 z-40 w-72 md:w-80">
+          <div className="relative overflow-hidden rounded-2xl border border-gray-700 bg-gradient-to-br from-[#1A1A1A] to-[#0F0F0F] shadow-2xl hover:shadow-3xl transition-all duration-300 hover:border-gray-600">
+            {/* Subtle Background Pattern */}
+            <div className="absolute inset-0 opacity-20">
+              <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <pattern id="sticky-grid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                    <rect width="20" height="20" fill="none" stroke="#FF6B2C" strokeWidth="0.5" opacity="0.3"/>
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#sticky-grid)" />
+              </svg>
+            </div>
+
+            {/* Content */}
+            <div className="relative z-10 p-5 flex items-center justify-between gap-4">
+              <div className="flex-1">
+                <h3 className="text-sm font-bold text-white mb-1">Check out my resume</h3>
+                <p className="text-xs text-gray-400">View my experience</p>
+              </div>
+              
+              <button
+                onClick={handleDownloadResume}
+                className="flex-shrink-0 px-5 py-2.5 bg-gradient-to-r from-[#FF6B2C] to-[#FF4500] rounded-lg font-bold text-white text-xs shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 whitespace-nowrap"
+              >
+                DOWNLOAD
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {mode === 'freelance' && (
+        <div className="fixed bottom-6 right-6 z-40 w-72 md:w-80">
+          <div className="relative overflow-hidden rounded-2xl border border-gray-700 bg-gradient-to-br from-[#1A1A1A] to-[#0F0F0F] shadow-2xl hover:shadow-3xl transition-all duration-300 hover:border-gray-600">
+            {/* Subtle Background Pattern */}
+            <div className="absolute inset-0 opacity-20">
+              <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <pattern id="sticky-grid-2" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                    <rect width="20" height="20" fill="none" stroke="#FF6B2C" strokeWidth="0.5" opacity="0.3"/>
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#sticky-grid-2)" />
+              </svg>
+            </div>
+
+            {/* Content */}
+            <div className="relative z-10 p-5 flex items-center justify-between gap-4">
+              <div className="flex-1">
+                <h3 className="text-sm font-bold text-white mb-1">Book a free call</h3>
+                <p className="text-xs text-gray-400">Let's discuss your project</p>
+              </div>
+              
+              <button
+                onClick={() => window.open('https://cal.com', '_blank')}
+                className="flex-shrink-0 px-5 py-2.5 bg-gradient-to-r from-[#FF6B2C] to-[#FF4500] rounded-lg font-bold text-white text-xs shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 whitespace-nowrap"
+              >
+                SCHEDULE
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-20">
+      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 animate-bounce z-20">
         <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
         </svg>

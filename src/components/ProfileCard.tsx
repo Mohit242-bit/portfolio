@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useRef, useCallback, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import "./ProfileCard.css";
 
 const DEFAULT_BEHIND_GRADIENT =
@@ -78,6 +79,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
 }) => {
   const wrapRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   const animationHandlers = useMemo(() => {
     if (!enableTilt) return null;
@@ -305,7 +307,8 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
 
   const handleContactClick = useCallback(() => {
     onContactClick?.();
-  }, [onContactClick]);
+    router.push('/contact');
+  }, [onContactClick, router]);
 
   return (
     <div

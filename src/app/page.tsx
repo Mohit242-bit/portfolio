@@ -7,6 +7,7 @@ import ProjectsGSAP from '@/components/ProjectsGSAP'
 import About from '@/components/About'
 import DrawSVGSection from '@/components/DrawSVGSection'
 import MagicBento from '@/components/MagicBento'
+import WorkExperience from '@/components/WorkExperience'
 import { useRouter } from 'next/navigation'
 
 export default function Home() {
@@ -42,6 +43,7 @@ export default function Home() {
             <About />
           </DrawSVGSection>
           <ProjectsGSAP />
+          <WorkExperience />
           <MagicBento 
             onIssuesClick={handleIssuesClick}
           />
