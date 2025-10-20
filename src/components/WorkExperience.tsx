@@ -58,12 +58,15 @@ export default function WorkExperience() {
                 {/* Header with Company Info */}
                 <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-6 mb-6 sm:mb-8 relative z-10">
                   {/* Company Logo */}
-                  <div className={`flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-xl sm:rounded-2xl bg-gradient-to-br ${exp.gradient} flex items-center justify-center shadow-lg group-hover:shadow-2xl transition-all duration-500 overflow-hidden`}>
-                    <img 
-                      src="/kraftx.png" 
-                      alt="KraftX Logo"
-                      className="w-full h-full object-cover"
-                    />
+                  <div className={`flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl sm:rounded-2xl bg-gradient-to-br ${exp.gradient} flex items-center justify-center shadow-lg group-hover:shadow-2xl transition-all duration-500 overflow-hidden border border-white/60`}>
+                    <div className="bg-white rounded-lg p-1 w-full h-full flex items-center justify-center">
+                      <img 
+                        src="/kraftx.png" 
+                        alt="KraftX Logo"
+                        className="w-full h-full object-contain"
+                        style={{ maxWidth: '90%', maxHeight: '90%' }}
+                      />
+                    </div>
                   </div>
 
                   {/* Company Details */}

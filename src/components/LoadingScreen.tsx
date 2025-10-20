@@ -178,7 +178,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
         {/* Main Title with individual character spans */}
         <div 
           ref={textRef}
-          className="text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-3 sm:mb-4 md:mb-6 leading-tight whitespace-nowrap overflow-x-auto"
+          className="text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-3 sm:mb-4 md:mb-6 leading-tight flex flex-wrap justify-center items-center text-center"
         >
           <span className="inline-block">H</span>
           <span className="inline-block">e</span>
@@ -191,17 +191,19 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
           <span className="inline-block">&apos;</span>
           <span className="inline-block">m</span>
           <span className="inline-block w-2 sm:w-3 md:w-4"></span>
-          <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">M</span>
-          <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">o</span>
-          <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">h</span>
-          <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">i</span>
-          <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">t</span>
-          <span className="inline-block w-2 sm:w-3 md:w-4"></span>
-          <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">R</span>
-          <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">a</span>
-          <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">w</span>
-          <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">a</span>
-          <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">t</span>
+          <span className="whitespace-nowrap">
+            <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">M</span>
+            <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">o</span>
+            <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">h</span>
+            <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">i</span>
+            <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">t</span>
+            <span className="inline-block w-2 sm:w-3 md:w-4"></span>
+            <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">R</span>
+            <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">a</span>
+            <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">w</span>
+            <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">a</span>
+            <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">t</span>
+          </span>
         </div>
 
         {/* Subtitle */}
