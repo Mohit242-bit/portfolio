@@ -14,8 +14,16 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Create WhatsApp message
-    const message = `Hi! I&apos;m ${formData.name}. I&apos;m interested in ${formData.service}. Email: ${formData.email}, Phone: ${formData.phone}. Message: ${formData.message}`
+    // Create WhatsApp message with clean formatting
+    const message = `Hello! 👋
+
+Name: ${formData.name}
+Service: ${formData.service}
+Email: ${formData.email}
+Phone: ${formData.phone}
+
+Message:
+${formData.message}`
     const whatsappUrl = `https://wa.me/918766545911?text=${encodeURIComponent(message)}`
     window.open(whatsappUrl, '_blank')
   }

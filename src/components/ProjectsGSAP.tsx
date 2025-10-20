@@ -73,7 +73,7 @@ const ProjectsGSAP = () => {
       tech: ["TypeScript", "React", "Design System"],
       gradient: "from-purple-600 to-pink-600",
       icon: "�",
-      liveUrl: "https://morpho-beryl.vercel.app",
+      liveUrl: "https://morphoverse-v2.vercel.app/",
       codeUrl: "https://github.com/Mohit242-bit/morpho",
       image: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&h=400&fit=crop&crop=center"
     },

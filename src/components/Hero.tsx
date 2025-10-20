@@ -13,25 +13,8 @@ const ModelViewer = dynamic(() => import('./ModelViewer'), {
 export default function Hero() {
   const [mode, setMode] = useState<'fulltime' | 'freelance'>('fulltime');
 
-  const handleDownloadResume = async () => {
-    try {
-      const response = await fetch('/api/resume');
-      if (!response.ok) throw new Error('Failed to download resume');
-      
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'Mohit-Rawat-Resume.pdf';
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(a);
-    } catch (error) {
-      console.error('Error downloading resume:', error);
-      alert('Failed to download resume. Please try again.');
-    }
-  };
+  // Direct download using public folder
+  const resumeUrl = '/resume.pdf'; // Update filename if needed
 
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-24 md:pb-32 bg-black">
@@ -145,12 +128,13 @@ export default function Hero() {
                 <p className="text-xs text-gray-400 line-clamp-1">View my experience</p>
               </div>
               
-              <button
-                onClick={handleDownloadResume}
+              <a
+                href={resumeUrl}
+                download
                 className="flex-shrink-0 px-3 sm:px-5 py-1.5 sm:py-2.5 bg-gradient-to-r from-[#FF6B2C] to-[#FF4500] rounded-lg font-bold text-white text-xs shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 whitespace-nowrap"
               >
                 DOWNLOAD
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -179,7 +163,7 @@ export default function Hero() {
               </div>
               
               <button
-                onClick={() => window.open('https://cal.com', '_blank')}
+                onClick={() => window.open('https://cal.com/mohit-rawat-ligl2u/30min', '_blank')}
                 className="flex-shrink-0 px-3 sm:px-5 py-1.5 sm:py-2.5 bg-gradient-to-r from-[#FF6B2C] to-[#FF4500] rounded-lg font-bold text-white text-xs shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 whitespace-nowrap"
               >
                 SCHEDULE
