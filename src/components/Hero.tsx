@@ -36,12 +36,12 @@ export default function Hero() {
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-24 md:pb-32 bg-black">
       {/* Clean black background only */}
-      
+
       {/* Toggle Button - Top Right Corner */}
-      <div className="fixed top-4 sm:top-6 right-4 sm:right-6 z-50 flex items-center gap-2 sm:gap-3">
+      <div className="fixed top-4 sm:top-6 right-10 sm:right-6 z-50 flex items-center gap-1 sm:gap-3 bg-black/80 rounded-full px-2 sm:px-4 py-1 sm:py-2 shadow-md max-w-xs sm:max-w-none">
         <button
           onClick={() => setMode('fulltime')}
-          className={`px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-all duration-300 ${
+          className={`px-2 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm font-medium transition-all duration-300 whitespace-nowrap ${
             mode === 'fulltime'
               ? 'text-white underline decoration-2 underline-offset-4'
               : 'text-gray-500 hover:text-gray-300'
@@ -49,10 +49,10 @@ export default function Hero() {
         >
           Full-Time
         </button>
-        <div className="w-px h-5 sm:h-6 bg-gray-700"></div>
+        <div className="w-px h-4 sm:h-5 bg-gray-700"></div>
         <button
           onClick={() => setMode('freelance')}
-          className={`px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-all duration-300 ${
+          className={`px-3 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm font-medium transition-all duration-300 whitespace-nowrap ${
             mode === 'freelance'
               ? 'text-white underline decoration-2 underline-offset-4'
               : 'text-gray-500 hover:text-gray-300'
@@ -60,8 +60,6 @@ export default function Hero() {
         >
           Freelance
         </button>
-        {mode === 'freelance'
-        }
       </div>
       
       <div className="max-w-screen-xl mx-auto px-3 sm:px-6 relative z-20 w-full">
