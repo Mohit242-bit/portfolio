@@ -36,7 +36,7 @@ ${formData.message}`
   }
 
   return (
-    <section className="min-h-screen bg-black flex items-center justify-center">
+    <section className="min-h-screen bg-black pt-24 sm:pt-28 md:pt-32 flex items-center justify-center">
       <div className="w-full max-w-2xl px-4">
         <ScrollAnimation animation="fadeUp">
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-6 text-center">Contact</h1>

@@ -101,12 +101,12 @@ export default function About() {
   ]
 
   return (
-    <section id="about" className="py-12 sm:py-16 md:py-20 bg-black">
+    <section id="about" className="py-6 sm:py-8 md:py-10 bg-black">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
             <ScrollAnimation animation="slideLeft">
-              <span className="inline-block px-3 py-1.5 sm:px-4 sm:py-2 bg-gray-700 text-blue-400 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6">
+              <span className="inline-block px-3 py-1.5 sm:px-4 sm:py-2 bg-gray-600 text-blue-400 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6">
                 About Me
               </span>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6">
@@ -147,7 +147,7 @@ export default function About() {
           
           {/* Skills Section - Tab Based Layout */}
           <ScrollAnimation animation="fadeUp" className="mt-8 sm:mt-12 md:mt-20">
-            <div className="text-center mb-6 sm:mb-8 md:mb-12 px-4">
+            <div className="text-center mb-4 sm:mb-6 md:mb-8 px-4">
               <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3 md:mb-4">Tech Stack</h3>
               <p className="text-xs sm:text-sm md:text-base text-gray-300 max-w-xs sm:max-w-xl md:max-w-2xl mx-auto">
                 Powerful technologies I use to build scalable, high-performance solutions

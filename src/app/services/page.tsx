@@ -32,7 +32,7 @@ export default function ServicesPage() {
   ];
 
   return (
-    <section className="min-h-screen bg-black py-16 sm:py-20 md:py-24">
+    <section className="min-h-screen bg-black pt-24 sm:pt-28 md:pt-32 py-16 sm:py-20 md:py-24">
       <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
         <ScrollAnimation animation="fadeUp">
           <div className="text-center mb-12 sm:mb-16 md:mb-20">
