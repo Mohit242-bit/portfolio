@@ -9,9 +9,9 @@ export default function WorkExperience() {
       logoUrl: "https://www.kraftxworks.com/",
       companyWebsite: "https://www.kraftxworks.com/",
       position: "Software Engineer Intern",
-      dateStart: "AUG 2023",
+      dateStart: "AUG 2025",
       dateEnd: "Present",
-      duration: "1+ years",
+      duration: "Ongoing",
       location: "Remote",
       description: "Developed modern web applications, intelligent automation workflows, and database solutions. Led implementation of business process automation that improved efficiency by 60%.",
       highlights: [
