@@ -60,6 +60,7 @@ const Loader = ({ placeholderSrc }: any) => {
 const Model = ({ url, autoRotate, autoRotateSpeed }: any) => {
   const modelRef = useRef(null)
   const groupRef = useRef(null)
+  const [error, setError] = useState(false)
   
   // Determine file extension
   const ext = url?.split('.').pop()?.toLowerCase()
@@ -72,7 +73,9 @@ const Model = ({ url, autoRotate, autoRotateSpeed }: any) => {
     if (ext === 'glb' || ext === 'gltf') {
       const gltf = useGLTF(url)
       model = Array.isArray(gltf) ? gltf[0]?.scene : gltf?.scene
-      console.log('GLB/GLTF Model loaded successfully')
+      if (model) {
+        console.log('✓ GLB/GLTF Model loaded successfully')
+      }
     } else if (ext === 'fbx') {
       const fbx = useFBX(url)
       model = Array.isArray(fbx) ? fbx[0] : fbx
@@ -81,8 +84,9 @@ const Model = ({ url, autoRotate, autoRotateSpeed }: any) => {
       model = Array.isArray(obj) ? obj[0] : obj
     }
   } catch (err) {
-    console.warn('Model loading warning:', err)
+    console.warn('⚠ Model loading warning:', err)
     loadError = true
+    setError(true)
   }
 
   // Auto-rotate animation - always call hooks
@@ -123,7 +127,7 @@ const Model = ({ url, autoRotate, autoRotateSpeed }: any) => {
 
   // Return null if no model or error
   if (loadError || !model) {
-    console.warn('No model found for URL:', url)
+    if (error) console.warn('⚠ No model found for URL:', url)
     return null
   }
 
@@ -167,17 +171,38 @@ const ModelViewer = ({
   onModelLoaded
 }: ModelViewerProps) => {
   const [loadError, setLoadError] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
 
-  // Preload the model
+  // Intersection Observer for lazy loading
   useEffect(() => {
-    if (url) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+          observer.unobserve(entry.target)
+        }
+      },
+      { threshold: 0.1 }
+    )
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
+
+  // Preload the model only when visible
+  useEffect(() => {
+    if (isVisible && url) {
       try {
         (useGLTF as any).preload(url)
       } catch (err) {
         console.warn('Preload failed:', err)
       }
     }
-  }, [url])
+  }, [url, isVisible])
 
   const pivot = useRef(new THREE.Vector3()).current
   const contactRef = useRef<any>(null)
@@ -217,6 +242,7 @@ const ModelViewer = ({
 
   return (
     <div
+      ref={containerRef}
       style={{
         width: typeof width === 'string' ? width : `${width}px`,
         height: `${height}px`,
@@ -224,140 +250,149 @@ const ModelViewer = ({
         position: 'relative'
       }}
     >
-      {showScreenshotButton && (
-        <button
-          onClick={capture}
-          style={{
-            position: 'absolute',
-            border: '1px solid #fff',
-            right: 16,
-            top: 16,
-            zIndex: 10,
-            cursor: 'pointer',
-            padding: '8px 16px',
-            borderRadius: 10,
-            background: 'rgba(0,0,0,0.5)',
-            color: '#fff',
-            fontSize: '14px',
-            fontWeight: 'bold'
-          }}
-        >
-          📸 Screenshot
-        </button>
-      )}
-
-      <Canvas
-        shadows={false}
-        dpr={[1, 1.5]}
-        performance={{ min: 0.1 }}
-        frameloop={autoRotate ? "always" : "demand"}
-        gl={{ 
-          preserveDrawingBuffer: false,
-          antialias: false,
-          alpha: true,
-          powerPreference: 'high-performance',
-          stencil: false,
-          depth: true,
-          failIfMajorPerformanceCaveat: false
-        }}
-        onCreated={({ gl, scene, camera }) => {
-          rendererRef.current = gl
-          sceneRef.current = scene
-          cameraRef.current = camera
-          gl.toneMapping = THREE.NoToneMapping
-          gl.outputColorSpace = THREE.SRGBColorSpace
-          gl.toneMappingExposure = 1
-          scene.background = null
-          
-          // Prevent context loss
-          const canvas = gl.domElement
-          canvas.addEventListener('webglcontextlost', (event) => {
-            event.preventDefault()
-            console.error('WebGL context lost!')
-          })
-          
-          canvas.addEventListener('webglcontextrestored', () => {
-            console.log('WebGL context restored')
-            window.location.reload() // Force reload on restore
-          })
-        }}
-        camera={{ fov: 50, position: [0, 0, camZ], near: 0.1, far: 100 }}
-        style={{ touchAction: 'pan-y pinch-zoom', width: '100%', height: '100%', background: 'transparent' }}
-      >
-        {/* Simple lighting - NO ENVIRONMENT to prevent context loss */}
-        <ambientLight intensity={1.2} />
-        
-        {/* Key light */}
-        <directionalLight 
-          position={[5, 5, 5]} 
-          intensity={1.5}
-        />
-        
-        {/* Fill light */}
-        <directionalLight 
-          position={[-3, 3, 5]} 
-          intensity={0.8}
-        />
-        
-        {/* Back light */}
-        <directionalLight 
-          position={[0, -2, -5]} 
-          intensity={0.5}
-        />
-
-        <Suspense fallback={<Loader placeholderSrc={placeholderSrc} />}>
-          {/* Load external model if URL provided */}
-          {url && !loadError && (
-            <Model url={url} autoRotate={autoRotate} autoRotateSpeed={autoRotateSpeed} />
+      {!isVisible ? (
+        // Show placeholder before intersection
+        <div className="w-full h-full bg-gray-900 rounded-lg flex items-center justify-center">
+          <div className="text-gray-400 text-xs">Loading...</div>
+        </div>
+      ) : (
+        <>
+          {showScreenshotButton && (
+            <button
+              onClick={capture}
+              style={{
+                position: 'absolute',
+                border: '1px solid #fff',
+                right: 16,
+                top: 16,
+                zIndex: 10,
+                cursor: 'pointer',
+                padding: '8px 16px',
+                borderRadius: 10,
+                background: 'rgba(0,0,0,0.5)',
+                color: '#fff',
+                fontSize: '14px',
+                fontWeight: 'bold'
+              }}
+            >
+              📸 Screenshot
+            </button>
           )}
 
-          {/* Load multiple models if URLs array provided */}
-          {urls && urls.map((modelUrl, idx) => (
-            <group key={idx}>
-              <Model url={modelUrl} autoRotate={autoRotate} autoRotateSpeed={autoRotateSpeed} />
-            </group>
-          ))}
-
-          {/* Fallback: Show default scene if no model loaded */}
-          {(!url && !urls) && (
-            <>
-              {/* Default rotating cube */}
-              <mesh position={[0, 0, 0]} rotation={[0.3, 0.6, 0]} scale={1.2}>
-                <boxGeometry args={[1, 1, 1]} />
-                <meshPhongMaterial 
-                  color="#6366f1"
-                  emissive="#4f46e5"
-                  shininess={100}
-                  side={THREE.FrontSide}
-                />
-              </mesh>
+          <Canvas
+            shadows={false}
+            dpr={[1, 1.5]}
+            performance={{ min: 0.1 }}
+            frameloop={autoRotate ? "always" : "demand"}
+            gl={{ 
+              preserveDrawingBuffer: false,
+              antialias: false,
+              alpha: true,
+              powerPreference: 'high-performance',
+              stencil: false,
+              depth: true,
+              failIfMajorPerformanceCaveat: false
+            }}
+            onCreated={({ gl, scene, camera }) => {
+              rendererRef.current = gl
+              sceneRef.current = scene
+              cameraRef.current = camera
+              gl.toneMapping = THREE.NoToneMapping
+              gl.outputColorSpace = THREE.SRGBColorSpace
+              gl.toneMappingExposure = 1
+              scene.background = null
               
-              {/* Torus knot for visual interest */}
-              <mesh position={[0, 0, 0]} scale={0.6}>
-                <torusKnotGeometry args={[0.4, 0.1, 100, 16]} />
-                <meshPhongMaterial 
-                  color="#8b5cf6"
-                  emissive="#7c3aed"
-                  shininess={100}
-                />
-              </mesh>
-            </>
-          )}
-        </Suspense>
+              // Handle context loss gracefully without reload
+              const canvas = gl.domElement
+              canvas.addEventListener('webglcontextlost', (event) => {
+                event.preventDefault()
+                console.warn('WebGL context lost - attempting recovery')
+              })
+              
+              canvas.addEventListener('webglcontextrestored', () => {
+                console.log('WebGL context restored successfully')
+                // Don't force reload - let Three.js handle recovery
+              })
+            }}
+            camera={{ fov: 50, position: [0, 0, camZ], near: 0.1, far: 100 }}
+            style={{ touchAction: 'pan-y pinch-zoom', width: '100%', height: '100%', background: 'transparent' }}
+          >
+            {/* Simple lighting - NO ENVIRONMENT to prevent context loss */}
+            <ambientLight intensity={1.2} />
+            
+            {/* Key light */}
+            <directionalLight 
+              position={[5, 5, 5]} 
+              intensity={1.5}
+            />
+            
+            {/* Fill light */}
+            <directionalLight 
+              position={[-3, 3, 5]} 
+              intensity={0.8}
+            />
+            
+            {/* Back light */}
+            <directionalLight 
+              position={[0, -2, -5]} 
+              intensity={0.5}
+            />
 
-        {enableManualRotation && (
-          <OrbitControls 
-            enablePan={false}
-            enableZoom={enableManualZoom}
-            minDistance={minZoomDistance}
-            maxDistance={maxZoomDistance}
-            dampingFactor={0.05}
-            rotateSpeed={0.5}
-            enableDamping={true}
-            autoRotate={false}
-          />
-        )}
-      </Canvas>
+            <Suspense fallback={<Loader placeholderSrc={placeholderSrc} />}>
+              {/* Load external model if URL provided */}
+              {url && !loadError && (
+                <Model url={url} autoRotate={autoRotate} autoRotateSpeed={autoRotateSpeed} />
+              )}
+
+              {/* Load multiple models if URLs array provided */}
+              {urls && urls.map((modelUrl, idx) => (
+                <group key={idx}>
+                  <Model url={modelUrl} autoRotate={autoRotate} autoRotateSpeed={autoRotateSpeed} />
+                </group>
+              ))}
+
+              {/* Fallback: Show default scene if no model loaded */}
+              {(!url && !urls) && (
+                <>
+                  {/* Default rotating cube */}
+                  <mesh position={[0, 0, 0]} rotation={[0.3, 0.6, 0]} scale={1.2}>
+                    <boxGeometry args={[1, 1, 1]} />
+                    <meshPhongMaterial 
+                      color="#6366f1"
+                      emissive="#4f46e5"
+                      shininess={100}
+                      side={THREE.FrontSide}
+                    />
+                  </mesh>
+                  
+                  {/* Torus knot for visual interest */}
+                  <mesh position={[0, 0, 0]} scale={0.6}>
+                    <torusKnotGeometry args={[0.4, 0.1, 100, 16]} />
+                    <meshPhongMaterial 
+                      color="#8b5cf6"
+                      emissive="#7c3aed"
+                      shininess={100}
+                    />
+                  </mesh>
+                </>
+              )}
+            </Suspense>
+
+            {enableManualRotation && (
+              <OrbitControls 
+                enablePan={false}
+                enableZoom={enableManualZoom}
+                minDistance={minZoomDistance}
+                maxDistance={maxZoomDistance}
+                dampingFactor={0.05}
+                rotateSpeed={0.5}
+                enableDamping={true}
+                autoRotate={false}
+              />
+            )}
+          </Canvas>
+        </>
+      )}
     </div>
   )
 }

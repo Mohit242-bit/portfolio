@@ -40,6 +40,10 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        
+        {/* Preload critical resources */}
+        <link rel="preload" href="/models/laptop.glb" as="fetch" crossOrigin="anonymous" />
+        <link rel="prefetch" href="/models/laptop.glb" as="fetch" crossOrigin="anonymous" />
       </head>
       <body className="antialiased bg-black tap-highlight-none">
         <GSAPPluginLoader />

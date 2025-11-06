@@ -7,7 +7,13 @@ import StarBorder from './StarBorder';
 
 const ModelViewer = dynamic(() => import('./ModelViewer'), {
   ssr: false,
-  loading: () => <div className="w-full h-full bg-gray-900 animate-pulse rounded-lg"></div>,
+  loading: () => (
+    <div className="w-full h-full bg-gray-900 animate-pulse rounded-lg flex items-center justify-center">
+      <div className="text-center">
+        <div className="text-gray-400 text-sm">Loading 3D Model...</div>
+      </div>
+    </div>
+  ),
 });
 
 export default function Hero() {
